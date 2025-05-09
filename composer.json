@@ -1,0 +1,27 @@
+{
+    "name": "webshoppen/webshoppen",
+    "description": "En enkel webbshop byggd med PHP",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webshoppen\\": "lib/"
+        },
+        "files": [
+            "includes/functions.php"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "chmod -R 777 public/uploads"
+        ]
+    }
+} 
