@@ -2,10 +2,8 @@
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
 
-// Kräv inloggning för att komma åt kundvagnen
 requireLogin();
 
-// Hantera uppdatering av kundvagn
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         $cart_item_id = filter_input(INPUT_POST, 'cart_item_id', FILTER_VALIDATE_INT);
@@ -30,13 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         
-        // Omdirigera för att undvika form resubmission
         header('Location: /cart.php');
         exit();
     }
 }
 
-// Hämta kundvagnens innehåll
 $cart_items = getCartItems($pdo, $_SESSION['user_id']);
 $total = calculateCartTotal($cart_items);
 

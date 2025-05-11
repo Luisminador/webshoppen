@@ -1,21 +1,17 @@
--- Skapa databas om den inte finns
 CREATE DATABASE IF NOT EXISTS webshoppen;
 USE webshoppen;
 
--- Radera existerande tabeller om de finns
 DROP TABLE IF EXISTS cart_items;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS users;
 
--- Skapa categories tabell
 CREATE TABLE categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Skapa products tabell
 CREATE TABLE products (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
@@ -29,7 +25,6 @@ CREATE TABLE products (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
--- Skapa users tabell
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -37,7 +32,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Skapa cart_items tabell
 CREATE TABLE cart_items (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
@@ -48,14 +42,12 @@ CREATE TABLE cart_items (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
--- Lägg till exempelkategorier
 INSERT INTO categories (name) VALUES 
 ('Accessoarer'),
 ('Kläder'),
 ('Skor'),
 ('Väskor');
 
--- Lägg till exempelprodukter
 INSERT INTO products (title, description, price, deal_price, image_url, category_id, popularity_factor) VALUES 
 ('ASOS DESIGN - Svart extra smal slips i satin', 'En elegant svart slips perfekt för formella tillfällen', 179.00, NULL, '/webshoppen/public/images/products/tie.jpg', 1, 85),
 ('ASOS DESIGN - Mattsvarta racer-solglasögon', 'Snygga solglasögon med modern design', 199.00, 150.00, '/webshoppen/public/images/products/sunglasses.jpg', 1, 95),

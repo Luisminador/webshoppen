@@ -1,113 +1,174 @@
 <?php
-require_once '../includes/db.php';
-require_once '../includes/functions.php';
 require_once '../includes/header.php';
+require_once '../includes/functions.php';
 
-$search = filter_input(INPUT_GET, 'q', FILTER_SANITIZE_STRING);
-$category_id = filter_input(INPUT_GET, 'category', FILTER_VALIDATE_INT);
+$search = isset($_GET['q']) ? trim($_GET['q']) : '';
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'title';
+$order = isset($_GET['order']) ? strtoupper($_GET['order']) : 'ASC';
 
-if (!$search) {
-    header('Location: /');
+if (empty($search)) {
+    header('Location: /webshoppen/public/');
     exit();
 }
 
-// Förbered sökfrågan
-$query = '
-    SELECT products.*, categories.name as category_name 
-    FROM products 
-    LEFT JOIN categories ON products.category_id = categories.id 
-    WHERE products.name LIKE :search 
-    OR products.description LIKE :search
-';
-
-$params = [':search' => "%$search%"];
-
-// Lägg till kategorifiltret om det finns
-if ($category_id) {
-    $query .= ' AND category_id = :category_id';
-    $params[':category_id'] = $category_id;
-}
-
-$query .= ' ORDER BY products.name ASC';
-
-// Hämta alla kategorier för filtret
-$categories = $pdo->query('SELECT * FROM categories ORDER BY name ASC')->fetchAll();
-
-// Utför sökningen
-$stmt = $pdo->prepare($query);
-$stmt->execute($params);
-$products = $stmt->fetchAll();
+$products = searchProducts($search, $sort, $order);
 ?>
 
-<div class="search-header">
-    <h1>Sökresultat för "<?= sanitize($search) ?>"</h1>
-    
-    <form method="GET" class="search-filters">
-        <input type="hidden" name="q" value="<?= sanitize($search) ?>">
+<div class="main-content">
+    <div class="search-results-header">
+        <h1>Sökresultat för "<?php echo htmlspecialchars($search); ?>"</h1>
+        <p>Hittade <?php echo count($products); ?> produkt(er)</p>
         
-        <div class="form-group">
-            <label for="category">Filtrera på kategori:</label>
-            <select name="category" id="category" onchange="this.form.submit()">
-                <option value="">Alla kategorier</option>
-                <?php foreach ($categories as $category): ?>
-                    <option value="<?= $category['id'] ?>" 
-                            <?= $category_id == $category['id'] ? 'selected' : '' ?>>
-                        <?= sanitize($category['name']) ?>
-                    </option>
-                <?php endforeach; ?>
+        <div class="sorting-options">
+            <label for="sort">Sortera efter:</label>
+            <select id="sort" onchange="updateSort(this.value)">
+                <option value="title-asc" <?php echo ($sort === 'title' && $order === 'ASC') ? 'selected' : ''; ?>>
+                    Namn (A-Ö)
+                </option>
+                <option value="title-desc" <?php echo ($sort === 'title' && $order === 'DESC') ? 'selected' : ''; ?>>
+                    Namn (Ö-A)
+                </option>
+                <option value="price-asc" <?php echo ($sort === 'price' && $order === 'ASC') ? 'selected' : ''; ?>>
+                    Pris (Lägst först)
+                </option>
+                <option value="price-desc" <?php echo ($sort === 'price' && $order === 'DESC') ? 'selected' : ''; ?>>
+                    Pris (Högst först)
+                </option>
             </select>
         </div>
-    </form>
+    </div>
+
+    <?php if (empty($products)): ?>
+        <div class="no-results">
+            <p>Inga produkter matchade din sökning.</p>
+            <div class="search-tips">
+                <h2>Söktips:</h2>
+                <ul>
+                    <li>Kontrollera stavningen</li>
+                    <li>Prova med färre sökord</li>
+                    <li>Använd mer generella söktermer</li>
+                    <li>Sök på produktkategori</li>
+                </ul>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="product-grid">
+            <?php foreach ($products as $product): ?>
+                <div class="product-card">
+                    <div class="image-container">
+                        <?php if ($product['image_url']): ?>
+                            <img src="<?php echo htmlspecialchars($product['image_url']); ?>" 
+                                 alt="<?php echo htmlspecialchars($product['title']); ?>">
+                        <?php endif; ?>
+                        
+                        <span class="product-category"><?php echo htmlspecialchars($product['category_name']); ?></span>
+                        
+                        <?php if (isset($product['deal_price']) && $product['deal_price'] > 0): ?>
+                            <span class="deal-badge">REA</span>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="product-info">
+                        <a href="product.php?id=<?php echo $product['id']; ?>" class="product-title">
+                            <?php echo htmlspecialchars($product['title']); ?>
+                        </a>
+                        
+                        <div class="product-price-container">
+                            <?php if (isset($product['deal_price']) && $product['deal_price'] > 0): ?>
+                                <span class="product-price sale"><?php echo number_format($product['deal_price'], 0, ',', ' '); ?> kr</span>
+                                <span class="product-price original"><?php echo number_format($product['price'], 0, ',', ' '); ?> kr</span>
+                            <?php else: ?>
+                                <span class="product-price"><?php echo number_format($product['price'], 0, ',', ' '); ?> kr</span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </div>
 
-<?php if (empty($products)): ?>
-    <p>Inga produkter hittades som matchar din sökning.</p>
+<script>
+function updateSort(value) {
+    const [sort, order] = value.split('-');
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('sort', sort);
+    currentUrl.searchParams.set('order', order);
+    window.location.href = currentUrl.toString();
+}
+</script>
+
+<style>
+.search-results-header {
+    margin-bottom: 2rem;
+}
+
+.search-results-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sorting-options {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sorting-options label {
+    color: #666;
+}
+
+.sorting-options select {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 0.875rem;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.search-tips {
+    margin-top: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-tips h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.search-tips ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    color: #666;
+}
+
+.search-tips li {
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .search-results-header {
+        margin-bottom: 1.5rem;
+    }
     
-    <div class="search-suggestions">
-        <h2>Tips för bättre sökresultat:</h2>
-        <ul>
-            <li>Kontrollera stavningen</li>
-            <li>Använd färre sökord</li>
-            <li>Prova med mer generella söktermer</li>
-            <li>Ta bort kategorifiltret om det är aktivt</li>
-        </ul>
-    </div>
-<?php else: ?>
-    <p>Hittade <?= count($products) ?> produkt(er)</p>
+    .sorting-options {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
     
-    <div class="product-grid">
-        <?php foreach ($products as $product): ?>
-            <div class="product-card">
-                <?php if ($product['image_url']): ?>
-                    <img src="<?= sanitize($product['image_url']) ?>" 
-                         alt="<?= sanitize($product['name']) ?>">
-                <?php endif; ?>
-                
-                <h3><?= sanitize($product['name']) ?></h3>
-                <p class="category"><?= sanitize($product['category_name']) ?></p>
-                <p class="price"><?= number_format($product['price'], 2) ?> kr</p>
-                
-                <?php if ($product['stock'] > 0): ?>
-                    <p class="stock">I lager: <?= $product['stock'] ?> st</p>
-                <?php else: ?>
-                    <p class="out-of-stock">Tillfälligt slut i lager</p>
-                <?php endif; ?>
-                
-                <div class="product-actions">
-                    <a href="/product.php?id=<?= $product['id'] ?>" class="btn">
-                        Visa produkt
-                    </a>
-                    
-                    <?php if (isLoggedIn() && $product['stock'] > 0): ?>
-                        <form method="POST" action="/product.php?id=<?= $product['id'] ?>">
-                            <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="btn">Köp</button>
-                        </form>
-                    <?php endif; ?>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-<?php endif; ?>
+    .sorting-options select {
+        width: 100%;
+    }
+}
+</style>
 
 <?php require_once '../includes/footer.php'; ?> 

@@ -19,19 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($password !== $confirm_password) {
             $error = 'Lösenorden matchar inte';
         } else {
-            // Kontrollera om användarnamnet redan finns
             $stmt = $pdo->prepare('SELECT id FROM users WHERE username = ?');
             $stmt->execute([$username]);
             if ($stmt->fetch()) {
                 $error = 'Användarnamnet är redan taget';
             } else {
-                // Kontrollera om e-postadressen redan finns
                 $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
                 $stmt->execute([$email]);
                 if ($stmt->fetch()) {
                     $error = 'E-postadressen är redan registrerad';
                 } else {
-                    // Skapa användaren
                     $stmt = $pdo->prepare('INSERT INTO users (username, email, password) VALUES (?, ?, ?)');
                     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                     
