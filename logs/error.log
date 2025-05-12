@@ -1,0 +1,54 @@
+[11-May-2025 23:24:51 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:25:00 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:25:01 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:25:11 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:25:14 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:25:15 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:28:44 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:28:48 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:29:01 Europe/Stockholm] PHP Fatal error:  Uncaught Error: Object of class PDO could not be converted to string in /Applications/MAMP/htdocs/webshoppen/includes/functions.php:122
+Stack trace:
+#0 /Applications/MAMP/htdocs/webshoppen/includes/functions.php(122): PDOStatement->execute(Array)
+#1 /Applications/MAMP/htdocs/webshoppen/public/cart.php(36): getCartItems(Object(PDO), 1)
+#2 {main}
+  thrown in /Applications/MAMP/htdocs/webshoppen/includes/functions.php on line 122
+[11-May-2025 23:29:07 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:47:28 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:47:36 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:47:37 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:47:38 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:47:39 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:52:42 Europe/Stockholm] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 2
+[11-May-2025 23:53:53 Europe/Stockholm] PHP Fatal error:  Uncaught Error: Object of class PDO could not be converted to string in /Applications/MAMP/htdocs/webshoppen/includes/functions.php:122
+Stack trace:
+#0 /Applications/MAMP/htdocs/webshoppen/includes/functions.php(122): PDOStatement->execute(Array)
+#1 /Applications/MAMP/htdocs/webshoppen/public/cart.php(36): getCartItems(Object(PDO), 1)
+#2 {main}
+  thrown in /Applications/MAMP/htdocs/webshoppen/includes/functions.php on line 122
+[11-May-2025 23:59:05 Europe/Stockholm] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in /Applications/MAMP/htdocs/webshoppen/public/login.php on line 40
+[11-May-2025 23:59:05 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[11-May-2025 23:59:15 Europe/Stockholm] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Applications/MAMP/htdocs/webshoppen/includes/header.php:94) in /Applications/MAMP/htdocs/webshoppen/public/login.php on line 8
+[12-May-2025 00:01:10 Europe/Stockholm] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in /Applications/MAMP/htdocs/webshoppen/public/login.php on line 40
+[12-May-2025 00:01:10 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 00:02:17 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 00:02:40 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 00:04:24 Europe/Stockholm] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Applications/MAMP/htdocs/webshoppen/includes/header.php:94) in /Applications/MAMP/htdocs/webshoppen/public/login.php on line 8
+[12-May-2025 00:04:45 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 00:04:51 Europe/Stockholm] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Applications/MAMP/htdocs/webshoppen/includes/header.php:94) in /Applications/MAMP/htdocs/webshoppen/public/login.php on line 8
+[12-May-2025 00:05:49 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 00:07:31 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 09:52:23 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 09:54:14 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 09:54:21 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 09:54:25 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 09:54:39 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 09:56:16 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 09:57:28 Europe/Stockholm] Login error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'last_login' in 'field list'
+[12-May-2025 12:50:54 Europe/Stockholm] PHP Warning:  include(includes/top-banner.php): Failed to open stream: No such file or directory in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 17
+[12-May-2025 12:50:54 Europe/Stockholm] PHP Warning:  include(): Failed opening 'includes/top-banner.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php8.2.20/lib/php') in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 17
+[12-May-2025 12:50:54 Europe/Stockholm] PHP Warning:  include(includes/category-nav.php): Failed to open stream: No such file or directory in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 57
+[12-May-2025 12:50:54 Europe/Stockholm] PHP Warning:  include(): Failed opening 'includes/category-nav.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php8.2.20/lib/php') in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 57
+[12-May-2025 12:50:56 Europe/Stockholm] PHP Warning:  include(includes/top-banner.php): Failed to open stream: No such file or directory in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 17
+[12-May-2025 12:50:56 Europe/Stockholm] PHP Warning:  include(): Failed opening 'includes/top-banner.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php8.2.20/lib/php') in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 17
+[12-May-2025 12:50:56 Europe/Stockholm] PHP Warning:  include(includes/category-nav.php): Failed to open stream: No such file or directory in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 57
+[12-May-2025 12:50:56 Europe/Stockholm] PHP Warning:  include(): Failed opening 'includes/category-nav.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php8.2.20/lib/php') in /Applications/MAMP/htdocs/webshoppen/includes/header.php on line 57
