@@ -1,0 +1,163 @@
+.register-container {
+    max-width: 500px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 2rem;
+}
+
+.register-container p.intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.1);
+}
+
+.form-group .requirements {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.register-btn:hover {
+    background-color: #555;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.register-btn:active {
+    transform: translateY(0);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+}
+
+.login-link a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+
+.alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.alert-error {
+    background-color: #fee;
+    color: #e33;
+    border: 1px solid #e33;
+}
+
+.alert-success {
+    background-color: #efe;
+    color: #3c3;
+    border: 1px solid #3c3;
+}
+
+.password-strength {
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0;
+    background: #eee;
+    transition: all 0.3s ease;
+}
+
+.strength-weak .password-strength-bar {
+    width: 33.33%;
+    background: #e33;
+}
+
+.strength-medium .password-strength-bar {
+    width: 66.66%;
+    background: #fc3;
+}
+
+.strength-strong .password-strength-bar {
+    width: 100%;
+    background: #3c3;
+}
+
+/* Responsiv design för mindre skärmar */
+@media (max-width: 480px) {
+    .register-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+    }
+    
+    .register-container h1 {
+        font-size: 1.75rem;
+    }
+    
+    .register-container p.intro {
+        font-size: 1rem;
+    }
+} 

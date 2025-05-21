@@ -15,7 +15,7 @@ require_once __DIR__ . '/functions.php';
 </head>
 <body>
     <div class="top-banner" role="banner">
-        LEVERANS 1-3 VARDAGAR - FRI FRAKT ÖVER 799 KR
+        FRI FRAKT VID KÖP ÖVER 899 KR
     </div>
     
     <header>
@@ -27,7 +27,7 @@ require_once __DIR__ . '/functions.php';
                         <span></span>
                         <span></span>
                     </button>
-                    <a href="/webshoppen/public/" class="logo">LJUS & HARMONI</a>
+                    <a href="/webshoppen/public/" class="logo">CANDELAS</a>
                 </li>
                 
                 <form action="/webshoppen/public/search.php" method="GET" class="search-form">
@@ -46,7 +46,7 @@ require_once __DIR__ . '/functions.php';
                 </form>
 
                 <div class="nav-links">
-                    <a href="/webshoppen/public/profile.php" aria-label="Mitt konto">
+                    <a href="<?= isLoggedIn() ? '/webshoppen/public/profile.php' : '/webshoppen/public/login.php' ?>" aria-label="<?= isLoggedIn() ? 'Mitt konto' : 'Logga in' ?>">
                         <i class="ri-user-3-line"></i>
                     </a>
                     <a href="/webshoppen/public/favorites.php" aria-label="Mina favoriter">

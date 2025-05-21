@@ -3,7 +3,7 @@ require_once '../includes/db.php';
 require_once '../includes/functions.php';
 
 if (isLoggedIn()) {
-    header('Location: /');
+    header('Location: /webshoppen/public/');
     exit();
 }
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             
-            header('Location: /');
+            header('Location: /webshoppen/public/');
             exit();
         } else {
             $error = 'Felaktigt användarnamn eller lösenord';
@@ -35,26 +35,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once '../includes/header.php';
 ?>
 
-<h1>Logga in</h1>
+<link rel="stylesheet" href="/webshoppen/public/css/login.css">
 
-<?php if ($error): ?>
-    <div class="alert alert-error"><?= sanitize($error) ?></div>
-<?php endif; ?>
+<div class="login-container">
+    <h1>Logga in</h1>
 
-<form method="POST" action="/login.php">
-    <div class="form-group">
-        <label for="username">Användarnamn:</label>
-        <input type="text" id="username" name="username" required>
-    </div>
+    <?php if ($error): ?>
+        <div class="alert alert-error"><?= sanitize($error) ?></div>
+    <?php endif; ?>
 
-    <div class="form-group">
-        <label for="password">Lösenord:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
+    <form method="POST" action="/webshoppen/public/login.php">
+        <div class="form-group">
+            <label for="username">Användarnamn</label>
+            <input type="text" 
+                   id="username" 
+                   name="username" 
+                   required 
+                   autocomplete="username"
+                   placeholder="Ange ditt användarnamn">
+        </div>
 
-    <button type="submit" class="btn">Logga in</button>
-</form>
+        <div class="form-group">
+            <label for="password">Lösenord</label>
+            <input type="password" 
+                   id="password" 
+                   name="password" 
+                   required
+                   autocomplete="current-password"
+                   placeholder="Ange ditt lösenord">
+        </div>
 
-<p>Har du inget konto? <a href="/register.php">Registrera dig här</a></p>
+        <p class="forgot-password">
+            <a href="/webshoppen/public/reset-password.php">Glömt lösenord?</a>
+        </p>
+
+        <button type="submit" class="login-btn">Logga in</button>
+    </form>
+
+    <p class="register-link">
+        Har du inget konto? <a href="/webshoppen/public/register.php">Registrera dig här</a>
+    </p>
+</div>
 
 <?php require_once '../includes/footer.php'; ?> 
