@@ -1,9 +1,6 @@
 <?php
-require_once '../includes/functions.php';
-
-logout();
-
-setFlashMessage('Du har loggats ut!', 'success');
+session_start();
+session_destroy();
 header('Location: /webshoppen/public/');
 exit();
 ?> 
